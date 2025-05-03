@@ -30,6 +30,31 @@
   --color-secondary: #f9b50c;
 }
 
+body {
+  background-color: var(--color-primary-dark);
+  color: var(--color-primary-light);
+  margin: 0;
+  font-family: Inter, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media screen and (width >= 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media screen and (width >= 1280px) {
+  .container {
+    max-width: 1288px;
+  }
+}
+
 *, :before, :after {
   box-sizing: border-box;
 }
@@ -61,31 +86,6 @@ button {
   cursor: pointer;
 }
 
-body {
-  background-color: var(--color-background-dark);
-  color: var(--color-primary-light);
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-@media screen and (width >= 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media screen and (width >= 1280px) {
-  .container {
-    max-width: 1288px;
-  }
-}
-
 .visually-hidden {
   width: 1px;
   height: 1px;
@@ -93,5 +93,37 @@ body {
   top: auto;
   left: -10000px;
   overflow: hidden;
+}
+
+.hero {
+  text-align: center;
+  background-image: url("hero.4d8bef24.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: 120px 0;
+}
+
+.hero__title {
+  margin-bottom: 30px;
+  font-family: Bluu Next Cyrillic, sans-serif;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero__btn {
+  background-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+  border: none;
+  border-radius: 30px;
+  align-items: center;
+  padding: 18px 36px;
+  font-family: Bluu Next Cyrillic, sans-serif;
+  font-size: 18px;
+  transition: background-color .3s;
+}
+
+.hero__btn:hover {
+  background-color: var(--color-primary-light);
 }
 /*# sourceMappingURL=harry-potter-api-site.cb66a315.css.map */

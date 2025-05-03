@@ -1,0 +1,31 @@
+.hero {
+    background-image: url('/src/images/hero/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+    text-align: center;
+  
+    &__title {
+      font-size: 80px;
+      font-family: 'Bluu Next Cyrillic', sans-serif;
+      font-weight: 700;
+      margin-bottom: 30px;
+      line-height: 1.2;
+    }
+  
+    &__btn {
+      padding: 18px 36px;
+      font-family: 'Bluu Next Cyrillic', sans-serif;
+      font-size: 18px;
+      background-color: var(--color-secondary);
+      color: var(--color-primary-dark);
+      border: none;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+      align-items: center;
+  
+      &:hover {
+        background-color: var(--color-primary-light);
+      }
+    }
+  }

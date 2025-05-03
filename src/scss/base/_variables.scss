@@ -6,6 +6,6 @@
     --color-secondary: #F9B50C; 
 }
 
-$bp-mobile: 480px;
-$bp-tablet: 768px;
-$bp-desktop: 1280px;
+$bp-mobile: 480px !default;
+$bp-tablet: 768px !default;
+$bp-desktop: 1280px !default;
