@@ -1,0 +1,26 @@
+/* inter-regular - latin */
+@font-face {
+     font-display: swap; 
+     font-family: 'Inter';
+     font-style: normal;
+     font-weight: 400;
+     src: url('/src/fonts/inter-v18-latin-regular.woff2') format('woff2'); 
+}
+
+   /* inter-500 - latin */
+   @font-face {
+     font-display: swap; 
+     font-family: 'Inter';
+     font-style: normal;
+     font-weight: 500;
+     src: url('/src/fonts/inter-v18-latin-500.woff2') format('woff2'); 
+   }
+
+   /* inter-700 - latin */
+   @font-face {
+     font-display: swap; 
+     font-family: 'Bluu Next Cyrillic';
+     font-style: normal;
+     font-weight: 700;
+     src: url('/src/fonts/Bluu-Next-Cyrillic.woff2') format('woff2');
+   }

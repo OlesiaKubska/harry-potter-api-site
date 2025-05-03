@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-background-dark);
+    color: var(--color-primary-light);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+
+    @media screen and (min-width: $bp-tablet) {
+        max-width: 768px;
+    }
+
+    @media screen and (min-width: $bp-desktop) {
+        max-width: 1288px;
+    }
+}
