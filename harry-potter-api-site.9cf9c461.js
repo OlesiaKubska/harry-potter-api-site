@@ -669,7 +669,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"ahnQa":[function(require,module,exports,__globalThis) {
 var _mainScss = require("../scss/main.scss");
 document.addEventListener('DOMContentLoaded', ()=>{
-    console.log("\uD83E\uDDD9\u200D\u2642\uFE0F Welcome to the Harry Potter API Site!");
+    console.log("\uD83E\uDDD9\u200D\u2642\uFE0F Welcome to the Harry Potter!");
+    const btn = document.querySelector('.hero__btn');
+    const charactersSection = document.getElementById('characters');
+    btn.addEventListener('click', ()=>{
+        charactersSection.classList.remove('hidden');
+        btn.disabled = true;
+    });
 // Add your JavaScript code here
 // initHeroSection();
 // initCharacterCards();
