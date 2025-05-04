@@ -14,6 +14,57 @@
           <button class="hero__btn">Показати всіх персонажів</button>
         </div>
       </section>
+      <section class="characters hidden" id="characters">
+        <div class="container">
+          <div class="characters__container">
+            <h2 class="visually-hidden">Персонажі</h2>
+            <ul class="characters__list">
+              <li class="characters__item">
+                <img
+                  src="/src/images/characters/students.jpg"
+                  srcset="
+                    /src/images/characters/students.jpg    1x,
+                    /src/images/characters/students@2x.jpg 2x
+                  "
+                  alt="Студенти Гоґвортсу"
+                  class="characters__image"
+                />
+                <button class="characters__btn" data-group="students">
+                  Студенти Гоґвортсу
+                </button>
+              </li>
+              <li class="characters__item">
+                <img
+                  src="/src/images/characters/employees.jpg"
+                  srcset="
+                    /src/images/characters/employees.jpg    1x,
+                    /src/images/characters/employees@2x.jpg 2x
+                  "
+                  alt="Співробітники Гоґвортсу"
+                  class="characters__image"
+                />
+                <button class="characters__btn" data-group="staff">
+                  Співробітники Гоґвортсу
+                </button>
+              </li>
+              <li class="characters__item">
+                <img
+                  src="/src/images/characters/characters.jpg"
+                  srcset="
+                    /src/images/characters/characters.jpg    1x,
+                    /src/images/characters/characters@2x.jpg 2x
+                  "
+                  alt="Персонажі в певному будинку"
+                  class="characters__image"
+                />
+                <button class="characters__btn" data-group="house">
+                  Персонажі в певному будинку
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="./scripts/main.ts"></script>

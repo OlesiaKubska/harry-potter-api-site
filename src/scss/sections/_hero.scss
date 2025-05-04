@@ -5,6 +5,10 @@
     padding: 120px 0;
     text-align: center;
   
+    @media screen and (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+        background-image: url('/src/images/hero/hero@2x.jpg');
+    }
+
     &__title {
       font-size: 80px;
       font-family: 'Bluu Next Cyrillic', sans-serif;
@@ -20,11 +24,12 @@
       background-color: var(--color-secondary);
       color: var(--color-primary-dark);
       border: none;
-      border-radius: 30px;
-      transition: background-color 0.3s ease;
+      border-radius: 100px;
+      transition: transform 0.3s, background-color 0.3s;
       align-items: center;
   
       &:hover {
+        transform: scale(1.05);
         background-color: var(--color-primary-light);
       }
     }
