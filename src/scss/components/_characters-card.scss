@@ -1,0 +1,30 @@
+.characters-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+    &__card {
+        background-color: var(--color-primary);
+        border-radius: 12px;
+        overflow: hidden;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s;
+    
+        &:hover {
+          transform: scale(1.05);
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+    }
+
+    &__info {
+        padding: 10px;
+        color: var(--color-secondary);
+    }
+  }

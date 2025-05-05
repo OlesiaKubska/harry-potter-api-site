@@ -99,6 +99,37 @@ button {
   display: none;
 }
 
+.characters-cards {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  display: flex;
+}
+
+.characters-cards__card {
+  background-color: var(--color-primary);
+  text-align: center;
+  border-radius: 12px;
+  width: 200px;
+  transition: transform .3s;
+  overflow: hidden;
+  box-shadow: 0 4px 8px #00000080;
+}
+
+.characters-cards__card:hover {
+  transform: scale(1.05);
+}
+
+.characters-cards__image {
+  width: 100%;
+  height: auto;
+}
+
+.characters-cards__info {
+  color: var(--color-secondary);
+  padding: 10px;
+}
+
 .hero {
   text-align: center;
   background-image: url("hero.4d8bef24.jpg");
@@ -145,6 +176,7 @@ button {
 
 .characters__container {
   justify-content: center;
+  margin-bottom: 40px;
   display: flex;
 }
 
