@@ -1,4 +1,5 @@
 import '../scss/main.scss';
+import '../images/svg/icons.svg';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🧙‍♂️ Welcome to the Harry Potter!');
@@ -14,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         house: string;
         hogwartsStudent: boolean;
         hogwartsStaff: boolean;
+        dateOfBirth: string;
+        alternate_names: string[];
       }
 
       const fetchCharacters = async (): Promise<Character[]> => {
@@ -34,10 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
           card.classList.add('characters-cards__card');
       
           card.innerHTML = `
-            <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
-            <div class="characters-cards__info">
-              <h3>${character.name}</h3>
-              <p>${character.house}</p>
+            <div class="characters-cards__image-wrap">
+                <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+                <div class="characters-cards__gradient">
+                    <div class="characters-cards__info">
+                        <h3 class="characters-cards__name">${character.name}</h3>
+                        <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
+                        <p class="characters-cards__house">${character.house}</p>
+                        <p class="characters-cards__dob">${character.dateOfBirth}</p>
+                        <button type="button" class="characters-cards__button">
+                            Більше інформації
+                            <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32" >
+                                <circle cx="12" cy="12" r="12"/>
+                                <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none" ></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
           `;
       
