@@ -668,6 +668,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"ahnQa":[function(require,module,exports,__globalThis) {
 var _mainScss = require("../scss/main.scss");
+var _iconsSvg = require("../images/svg/icons.svg");
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log("\uD83E\uDDD9\u200D\u2642\uFE0F Welcome to the Harry Potter!");
     const btn = document.querySelector('.hero__btn');
@@ -690,10 +691,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const card = document.createElement('div');
             card.classList.add('characters-cards__card');
             card.innerHTML = `
-            <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
-            <div class="characters-cards__info">
-              <h3>${character.name}</h3>
-              <p>${character.house}</p>
+            <div class="characters-cards__image-wrap">
+                <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+                <div class="characters-cards__gradient">
+                    <div class="characters-cards__info">
+                        <h3 class="characters-cards__name">${character.name}</h3>
+                        <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
+                        <p class="characters-cards__house">${character.house}</p>
+                        <p class="characters-cards__dob">${character.dateOfBirth}</p>
+                        <button type="button" class="characters-cards__button">
+                            \u{411}\u{456}\u{43B}\u{44C}\u{448}\u{435} \u{456}\u{43D}\u{444}\u{43E}\u{440}\u{43C}\u{430}\u{446}\u{456}\u{457}
+                            <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32" >
+                                <circle cx="12" cy="12" r="12"/>
+                                <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none" ></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
           `;
             charactersContainer.appendChild(card);
@@ -717,6 +731,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 });
 
-},{"../scss/main.scss":"4Pg3x"}],"4Pg3x":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
+},{"../scss/main.scss":"4Pg3x","../images/svg/icons.svg":"lp8B6"}],"4Pg3x":[function() {},{}],"lp8B6":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
 
 //# sourceMappingURL=harry-potter-api-site.9cf9c461.js.map
