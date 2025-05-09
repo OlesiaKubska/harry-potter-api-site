@@ -677,6 +677,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const filterButtons = document.querySelectorAll('.characters__btn');
     const houseFilterContainer = document.querySelector('.characters-filters');
     const houseFilterButtons = houseFilterContainer.querySelectorAll('.characters-filters__btn');
+    const charactersTitle = document.getElementById('characters-title');
     const fetchCharacters = async ()=>{
         try {
             const response = await fetch('https://hp-api.onrender.com/api/characters');
@@ -694,6 +695,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
             console.error(`Error fetching characters for ${house}:`, error);
             return [];
         }
+    };
+    const updateTitle = (group)=>{
+        const titles = {
+            students: "\u0421\u0442\u0443\u0434\u0435\u043D\u0442\u0438 \u0413\u043E\u0491\u0432\u043E\u0440\u0442\u0441\u0443",
+            staff: "\u0421\u043F\u0456\u0432\u0440\u043E\u0431\u0456\u0442\u043D\u0438\u043A\u0438 \u0413\u043E\u0491\u0432\u043E\u0440\u0442\u0441\u0443",
+            house: "\u041F\u0435\u0440\u0441\u043E\u043D\u0430\u0436\u0456 \u0432 \u043F\u0435\u0432\u043D\u043E\u043C\u0443 \u0431\u0443\u0434\u0438\u043D\u043A\u0443"
+        };
+        charactersTitle.textContent = titles[group] || '';
+        charactersTitle.classList.remove('visually-hidden');
     };
     const renderCharacters = (characters)=>{
         charactersContainer.innerHTML = '';
@@ -731,6 +741,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         button.addEventListener('click', async ()=>{
             const group = button.getAttribute('data-group');
             const characters = await fetchCharacters();
+            if (!group) return;
+            updateTitle(group);
             let filteredCharacters = [];
             if (group === 'students') {
                 filteredCharacters = characters.filter((char)=>char.hogwartsStudent);

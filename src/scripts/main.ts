@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.characters__btn');
   const houseFilterContainer = document.querySelector('.characters-filters') as HTMLElement;
   const houseFilterButtons = houseFilterContainer.querySelectorAll('.characters-filters__btn');
+  const charactersTitle = document.getElementById('characters-title') as HTMLElement;
 
   interface Character {
     name: string;
@@ -39,6 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(`Error fetching characters for ${house}:`, error);
       return [];
     }
+  };
+
+  const updateTitle = (group: string) => {
+    const titles: Record<string, string> = {
+      students: 'Студенти Гоґвортсу',
+      staff: 'Співробітники Гоґвортсу',
+      house: 'Персонажі в певному будинку',
+    };
+    charactersTitle.textContent = titles[group] || '';
+    charactersTitle.classList.remove('visually-hidden');
   };
 
   const renderCharacters = (characters: Character[]) => {
@@ -80,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async () => {
       const group = button.getAttribute('data-group');
       const characters = await fetchCharacters();
+      
+      if (!group) return;
+      updateTitle(group);
 
       let filteredCharacters: Character[] = [];
 

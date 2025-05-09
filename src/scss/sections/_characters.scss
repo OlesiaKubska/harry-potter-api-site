@@ -48,4 +48,17 @@
         transform: scale(1.05);
       }
     }
+
+    &__title {
+      font-family: 'Bluu Next Cyrillic', sans-serif;
+      font-size: 80px;
+      font-weight: 700;
+      margin-top: 100px;
+      color: var(--color-primary-light);
+      text-align: center;
+      text-transform: uppercase;
+      max-width: 840px;
+      line-height: 1.2;
+      margin: 0 auto 70px;
+    }
   }
