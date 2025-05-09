@@ -96,7 +96,7 @@ button {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .characters-cards {
@@ -200,7 +200,7 @@ button {
   border-radius: 100px;
   justify-content: space-between;
   max-width: 1240px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
   display: flex;
 }
 
@@ -211,7 +211,7 @@ button {
   display: flex;
 }
 
-.characters-filters__item--active {
+.characters-filters__item--active .characters-filters__btn {
   background-color: var(--color-secondary);
   color: var(--color-primary-dark);
 }
@@ -228,6 +228,7 @@ button {
   font-family: Bluu Next Cyrillic, sans-serif;
   font-size: 18px;
   font-weight: 700;
+  transition: all .3s;
   display: flex;
 }
 
