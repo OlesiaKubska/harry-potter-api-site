@@ -1,0 +1,46 @@
+.characters-filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    border: 1px solid var(--color-background-light);
+    max-width: 1240px;
+    margin: 0 auto;
+    border-radius: 100px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+  
+      &--active {
+        background-color: var(--color-secondary);
+        color: var(--color-primary-dark);
+      }
+    }
+  
+    &__btn {
+      display: flex;
+      align-items: center;
+      font-family: 'Bluu Next Cyrillic', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      background-color: transparent;
+      color: var(--color-accent-light);
+      text-transform: uppercase;
+      gap: 10px;
+      padding: 10px 76px;
+      border-radius: 100px;
+      border: none;
+  
+      &:hover {
+        background-color: var(--color-secondary);
+        color: var(--color-primary-dark);
+      }
+    }
+
+    &__image {
+      width: 35px;
+      height: 38px;
+    }
+  }
