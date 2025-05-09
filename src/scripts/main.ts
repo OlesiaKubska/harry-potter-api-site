@@ -2,88 +2,115 @@ import '../scss/main.scss';
 import '../images/svg/icons.svg';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🧙‍♂️ Welcome to the Harry Potter!');
+  console.log('🧙‍♂️ Welcome to the Harry Potter!');
 
-    const btn = document.querySelector('.hero__btn') as HTMLButtonElement;
-    const charactersSection = document.getElementById('characters') as HTMLElement;
-    const charactersContainer = document.querySelector('.characters-cards') as HTMLElement;
-    const filterButtons = document.querySelectorAll('.characters__btn');
+  const btn = document.querySelector('.hero__btn') as HTMLButtonElement;
+  const charactersSection = document.getElementById('characters') as HTMLElement;
+  const charactersContainer = document.querySelector('.characters-cards') as HTMLElement;
+  const filterButtons = document.querySelectorAll('.characters__btn');
+  const houseFilterContainer = document.querySelector('.characters-filters') as HTMLElement;
+  const houseFilterButtons = houseFilterContainer.querySelectorAll('.characters-filters__btn');
 
-    interface Character {
-        name: string;
-        image: string;
-        house: string;
-        hogwartsStudent: boolean;
-        hogwartsStaff: boolean;
-        dateOfBirth: string;
-        alternate_names: string[];
+  interface Character {
+    name: string;
+    image: string;
+    house: string;
+    hogwartsStudent: boolean;
+    hogwartsStaff: boolean;
+    dateOfBirth: string;
+    alternate_names: string[];
+  }
+
+  const fetchCharacters = async (): Promise<Character[]> => {
+    try {
+      const response = await fetch('https://hp-api.onrender.com/api/characters');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      return [];
+    }
+  };
+
+  const fetchByHouse = async (house: string): Promise<Character[]> => {
+    try {
+      const response = await fetch(`https://hp-api.onrender.com/api/characters/house/${house}`);
+      return await response.json();
+    } catch (error) {
+      console.error(`Error fetching characters for ${house}:`, error);
+      return [];
+    }
+  };
+
+  const renderCharacters = (characters: Character[]) => {
+    charactersContainer.innerHTML = '';
+    characters.forEach((character) => {
+      const card = document.createElement('div');
+      card.classList.add('characters-cards__card');
+
+      card.innerHTML = `
+        <div class="characters-cards__image-wrap">
+          <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+          <div class="characters-cards__gradient">
+            <div class="characters-cards__info">
+              <h3 class="characters-cards__name">${character.name}</h3>
+              <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
+              <p class="characters-cards__house">${character.house}</p>
+              <p class="characters-cards__dob">${character.dateOfBirth}</p>
+              <button type="button" class="characters-cards__button">
+                Більше інформації
+                <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32">
+                  <circle cx="12" cy="12" r="12" />
+                  <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      charactersContainer.appendChild(card);
+    });
+  };
+
+  btn.addEventListener('click', () => {
+    charactersSection.classList.remove('hidden');
+    btn.disabled = true;
+  });
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const group = button.getAttribute('data-group');
+      const characters = await fetchCharacters();
+
+      let filteredCharacters: Character[] = [];
+
+      if (group === 'students') {
+        filteredCharacters = characters.filter((char) => char.hogwartsStudent);
+        houseFilterContainer.classList.add('hidden');
+      } else if (group === 'staff') {
+        filteredCharacters = characters.filter((char) => char.hogwartsStaff);
+        houseFilterContainer.classList.add('hidden');
+      } else if (group === 'house') {
+        filteredCharacters = characters;
+        houseFilterContainer.classList.remove('hidden');
       }
 
-      const fetchCharacters = async (): Promise<Character[]> => {
-        try {
-          const response = await fetch('https://hp-api.onrender.com/api/characters');
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error('Error fetching characters:', error);
-          return [];
-        }
-      };
-
-      const renderCharacters = (characters: Character[]) => {
-        charactersContainer.innerHTML = '';
-        characters.forEach((character) => {
-          const card = document.createElement('div');
-          card.classList.add('characters-cards__card');
-      
-          card.innerHTML = `
-            <div class="characters-cards__image-wrap">
-                <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
-                <div class="characters-cards__gradient">
-                    <div class="characters-cards__info">
-                        <h3 class="characters-cards__name">${character.name}</h3>
-                        <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
-                        <p class="characters-cards__house">${character.house}</p>
-                        <p class="characters-cards__dob">${character.dateOfBirth}</p>
-                        <button type="button" class="characters-cards__button">
-                            Більше інформації
-                            <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32" >
-                                <circle cx="12" cy="12" r="12"/>
-                                <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none" ></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-          `;
-      
-          charactersContainer.appendChild(card);
-        });
-      };
-
-    btn.addEventListener('click', () => {
-        charactersSection.classList.remove('hidden');
-        btn.disabled = true;
+      renderCharacters(filteredCharacters);
     });
+  });
 
-    filterButtons.forEach((button) => {
-        button.addEventListener('click', async () => {
-          const group = button.getAttribute('data-group');
-          const characters = await fetchCharacters();
-      
-          let filteredCharacters: Character[] = [];
-      
-          if (group === 'students') {
-            filteredCharacters = characters.filter((char) => char.hogwartsStudent);
-          } else if (group === 'staff') {
-            filteredCharacters = characters.filter((char) => char.hogwartsStaff);
-          } else if (group === 'house') {
-            // Assuming you want to filter by Gryffindor for this example
-            filteredCharacters = characters.filter((char) => char.house === 'Gryffindor');
-          }
-      
-          renderCharacters(filteredCharacters);
-        });
-      });
-      
+  houseFilterButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const house = btn.getAttribute('data-house');
+      if (!house) return;
+
+      const characters = await fetchByHouse(house);
+      renderCharacters(characters);
+
+      houseFilterButtons.forEach((b) =>
+        b.closest('.characters-filters__item')?.classList.remove('characters-filters__item--active')
+      );
+
+      btn.closest('.characters-filters__item')?.classList.add('characters-filters__item--active');
+    });
+  });
 });

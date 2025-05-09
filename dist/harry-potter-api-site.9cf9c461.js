@@ -675,13 +675,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const charactersSection = document.getElementById('characters');
     const charactersContainer = document.querySelector('.characters-cards');
     const filterButtons = document.querySelectorAll('.characters__btn');
+    const houseFilterContainer = document.querySelector('.characters-filters');
+    const houseFilterButtons = houseFilterContainer.querySelectorAll('.characters-filters__btn');
     const fetchCharacters = async ()=>{
         try {
             const response = await fetch('https://hp-api.onrender.com/api/characters');
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             console.error('Error fetching characters:', error);
+            return [];
+        }
+    };
+    const fetchByHouse = async (house)=>{
+        try {
+            const response = await fetch(`https://hp-api.onrender.com/api/characters/house/${house}`);
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching characters for ${house}:`, error);
             return [];
         }
     };
@@ -691,25 +701,25 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const card = document.createElement('div');
             card.classList.add('characters-cards__card');
             card.innerHTML = `
-            <div class="characters-cards__image-wrap">
-                <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
-                <div class="characters-cards__gradient">
-                    <div class="characters-cards__info">
-                        <h3 class="characters-cards__name">${character.name}</h3>
-                        <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
-                        <p class="characters-cards__house">${character.house}</p>
-                        <p class="characters-cards__dob">${character.dateOfBirth}</p>
-                        <button type="button" class="characters-cards__button">
-                            \u{411}\u{456}\u{43B}\u{44C}\u{448}\u{435} \u{456}\u{43D}\u{444}\u{43E}\u{440}\u{43C}\u{430}\u{446}\u{456}\u{457}
-                            <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32" >
-                                <circle cx="12" cy="12" r="12"/>
-                                <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none" ></use>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+        <div class="characters-cards__image-wrap">
+          <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+          <div class="characters-cards__gradient">
+            <div class="characters-cards__info">
+              <h3 class="characters-cards__name">${character.name}</h3>
+              <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
+              <p class="characters-cards__house">${character.house}</p>
+              <p class="characters-cards__dob">${character.dateOfBirth}</p>
+              <button type="button" class="characters-cards__button">
+                \u{411}\u{456}\u{43B}\u{44C}\u{448}\u{435} \u{456}\u{43D}\u{444}\u{43E}\u{440}\u{43C}\u{430}\u{446}\u{456}\u{457}
+                <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32">
+                  <circle cx="12" cy="12" r="12" />
+                  <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none"></use>
+                </svg>
+              </button>
             </div>
-          `;
+          </div>
+        </div>
+      `;
             charactersContainer.appendChild(card);
         });
     };
@@ -722,11 +732,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const group = button.getAttribute('data-group');
             const characters = await fetchCharacters();
             let filteredCharacters = [];
-            if (group === 'students') filteredCharacters = characters.filter((char)=>char.hogwartsStudent);
-            else if (group === 'staff') filteredCharacters = characters.filter((char)=>char.hogwartsStaff);
-            else if (group === 'house') // Assuming you want to filter by Gryffindor for this example
-            filteredCharacters = characters.filter((char)=>char.house === 'Gryffindor');
+            if (group === 'students') {
+                filteredCharacters = characters.filter((char)=>char.hogwartsStudent);
+                houseFilterContainer.classList.add('hidden');
+            } else if (group === 'staff') {
+                filteredCharacters = characters.filter((char)=>char.hogwartsStaff);
+                houseFilterContainer.classList.add('hidden');
+            } else if (group === 'house') {
+                filteredCharacters = characters;
+                houseFilterContainer.classList.remove('hidden');
+            }
             renderCharacters(filteredCharacters);
+        });
+    });
+    houseFilterButtons.forEach((btn)=>{
+        btn.addEventListener('click', async ()=>{
+            const house = btn.getAttribute('data-house');
+            if (!house) return;
+            const characters = await fetchByHouse(house);
+            renderCharacters(characters);
+            houseFilterButtons.forEach((b)=>b.closest('.characters-filters__item')?.classList.remove('characters-filters__item--active'));
+            btn.closest('.characters-filters__item')?.classList.add('characters-filters__item--active');
         });
     });
 });

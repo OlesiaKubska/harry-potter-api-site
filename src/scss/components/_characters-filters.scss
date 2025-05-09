@@ -1,11 +1,11 @@
 .characters-filters {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
     border: 1px solid var(--color-background-light);
     max-width: 1240px;
     margin: 0 auto;
     border-radius: 100px;
+    margin-bottom: 50px;
 
     &__item {
       display: flex;
@@ -13,7 +13,7 @@
       justify-content: center;
       gap: 10px;
   
-      &--active {
+      &--active .characters-filters__btn {
         background-color: var(--color-secondary);
         color: var(--color-primary-dark);
       }
@@ -32,6 +32,7 @@
       padding: 10px 76px;
       border-radius: 100px;
       border: none;
+      transition: all 0.3s ease;
   
       &:hover {
         background-color: var(--color-secondary);
