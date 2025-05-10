@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const charactersTitle = document.getElementById('characters-title') as HTMLElement;
   const modal = document.getElementById('character-modal') as HTMLElement;
   const modalBody = document.getElementById('modal-body') as HTMLElement;
-  const closeModalBtn = modal.querySelector('.modal__close') as HTMLButtonElement;
+  const modalContent = document.querySelector('.modal__content') as HTMLElement;
 
   interface Character {
     name: string;
@@ -72,10 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="characters-cards__dob">${character.dateOfBirth}</p>
               <button type="button" class="characters-cards__button" data-character='${JSON.stringify(character).replace(/'/g, "&#39;")}'>
                 Більше інформації
-                <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32">
-                  <circle cx="12" cy="12" r="12" />
-                  <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none"></use>
-                </svg>
+                <span class="characters-cards__span">
+                  <span class="circle"></span>
+                  <svg class="arrow-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2 12h28M24 6l6 6-6 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span> 
               </button>
             </div>
           </div>
@@ -131,8 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  closeModalBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
+  modal.addEventListener('click', (event: MouseEvent) => {
+    if (!modalContent.contains(event.target as Node)) {
+      modal.classList.add('hidden');
+    }
   });
 
   charactersContainer.addEventListener('click', (e) => {

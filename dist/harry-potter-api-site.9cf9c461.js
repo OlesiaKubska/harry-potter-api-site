@@ -680,7 +680,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const charactersTitle = document.getElementById('characters-title');
     const modal = document.getElementById('character-modal');
     const modalBody = document.getElementById('modal-body');
-    const closeModalBtn = modal.querySelector('.modal__close');
+    const modalContent = document.querySelector('.modal__content');
     const fetchCharacters = async ()=>{
         try {
             const response = await fetch('https://hp-api.onrender.com/api/characters');
@@ -724,10 +724,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
               <p class="characters-cards__dob">${character.dateOfBirth}</p>
               <button type="button" class="characters-cards__button" data-character='${JSON.stringify(character).replace(/'/g, "&#39;")}'>
                 \u{411}\u{456}\u{43B}\u{44C}\u{448}\u{435} \u{456}\u{43D}\u{444}\u{43E}\u{440}\u{43C}\u{430}\u{446}\u{456}\u{457}
-                <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32">
-                  <circle cx="12" cy="12" r="12" />
-                  <use href="#icon-guidance-up" stroke="currentColor" stroke-width="2" fill="none"></use>
-                </svg>
+                <span class="characters-cards__span">
+                  <span class="circle"></span>
+                  <svg class="arrow-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M2 12h28M24 6l6 6-6 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span> 
               </button>
             </div>
           </div>
@@ -770,8 +772,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             btn.closest('.characters-filters__item')?.classList.add('characters-filters__item--active');
         });
     });
-    closeModalBtn.addEventListener('click', ()=>{
-        modal.classList.add('hidden');
+    modal.addEventListener('click', (event)=>{
+        if (!modalContent.contains(event.target)) modal.classList.add('hidden');
     });
     charactersContainer.addEventListener('click', (e)=>{
         const btn = e.target.closest('.characters-cards__button');
