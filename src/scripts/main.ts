@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const houseFilterContainer = document.querySelector('.characters-filters') as HTMLElement;
   const houseFilterButtons = houseFilterContainer.querySelectorAll('.characters-filters__btn');
   const charactersTitle = document.getElementById('characters-title') as HTMLElement;
+  const modal = document.getElementById('character-modal') as HTMLElement;
+  const modalBody = document.getElementById('modal-body') as HTMLElement;
+  const closeModalBtn = modal.querySelector('.modal__close') as HTMLButtonElement;
 
   interface Character {
     name: string;
@@ -67,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="characters-cards__desc">${character.alternate_names?.[0] || ''}</p>
               <p class="characters-cards__house">${character.house}</p>
               <p class="characters-cards__dob">${character.dateOfBirth}</p>
-              <button type="button" class="characters-cards__button">
+              <button type="button" class="characters-cards__button" data-character='${JSON.stringify(character).replace(/'/g, "&#39;")}'>
                 Більше інформації
                 <svg class="characters-cards__icon" width="30" height="20" viewBox="0 0 52 32">
                   <circle cx="12" cy="12" r="12" />
@@ -91,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async () => {
       const group = button.getAttribute('data-group');
       const characters = await fetchCharacters();
-      
+
       if (!group) return;
       updateTitle(group);
 
@@ -127,4 +130,41 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.closest('.characters-filters__item')?.classList.add('characters-filters__item--active');
     });
   });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  charactersContainer.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.characters-cards__button') as HTMLButtonElement;
+  if (!btn) return;
+
+  const characterData = btn.getAttribute('data-character');
+  if (!characterData) return;
+
+  const character = JSON.parse(characterData);
+
+  modalBody.innerHTML = `
+    <p><strong>Name:</strong> ${character.name}</p>
+    <p><strong>Alternate names:</strong> ${character.alternate_names?.join(', ') || 'None'}</p>
+    <p><strong>Species:</strong> ${character.species || 'Unknown'}</p>
+    <p><strong>Gender:</strong> ${character.gender || 'Unknown'}</p>
+    <p><strong>House:</strong> ${character.house || 'Unknown'}</p>
+    <p><strong>Date of birth:</strong> ${character.dateOfBirth || 'Unknown'}</p>
+    <p><strong>Year of birth:</strong> ${character.yearOfBirth || 'Unknown'}</p>
+    <p><strong>Wizard:</strong> ${character.wizard ? 'True' : 'False'}</p>
+    <p><strong>Ancestry:</strong> ${character.ancestry || 'Unknown'}</p>
+    <p><strong>Eye colour:</strong> ${character.eyeColour || 'Unknown'}</p>
+    <p><strong>Hair colour:</strong> ${character.hairColour || 'Unknown'}</p>
+    <p><strong>Wand:</strong> ${character.wand?.wood || '-'}, ${character.wand?.core || '-'}, length: ${character.wand?.length || '-'}</p>
+    <p><strong>Patronus:</strong> ${character.patronus || 'None'}</p>
+    <p><strong>Hogwarts student:</strong> ${character.hogwartsStudent ? 'True' : 'False'}</p>
+    <p><strong>Hogwarts staff:</strong> ${character.hogwartsStaff ? 'True' : 'False'}</p>
+    <p><strong>Actor:</strong> ${character.actor || 'Unknown'}</p>
+    <p><strong>Alive:</strong> ${character.alive ? 'True' : 'False'}</p>
+  `;
+
+  modal.classList.remove('hidden');
+    }
+  );
 });

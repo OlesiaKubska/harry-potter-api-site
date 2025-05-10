@@ -241,6 +241,57 @@ button {
   height: 38px;
 }
 
+.modal {
+  z-index: 100;
+  background-color: #000000b3;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal__content {
+  background: var(--color-primary-dark);
+  border-radius: 100px;
+  gap: 2px;
+  width: 90%;
+  max-width: 320px;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.modal__content p {
+  color: var(--color-secondary);
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.modal__content strong {
+  color: var(--color-accent-light);
+  font-weight: 400;
+}
+
+.modal__close {
+  color: var(--color-accent-light);
+  background: none;
+  border: none;
+  font-size: 24px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.modal__close:hover {
+  color: var(--color-secondary);
+}
+
 .hero {
   text-align: center;
   background-image: url("hero.4d8bef24.jpg");
