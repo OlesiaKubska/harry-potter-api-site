@@ -12,11 +12,3 @@
 .hidden {
     display: none !important;
 }
-
-#load-more-btn {
-    display: none;
-  
-    @media (max-width: $bp-desktop) {
-      display: block;
-    }
-}

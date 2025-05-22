@@ -1,3 +1,5 @@
+@use "../base/variables" as *;
+
 .characters {
     padding-block: 60px;
     background-color: var(--color-primary-dark);
@@ -5,18 +7,27 @@
     &__container {
       display: flex;
       justify-content: center;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
+
+      @media screen and (min-width: $bp-tablet) {
+        margin-bottom: 40px;
+      }
     }
 
     &__list {
       display: flex;
+      justify-content: center;
       gap: 20px;
-      flex-wrap: wrap;
     }
 
     &__item {
       text-align: center;
-      max-width: 400px;
+      max-width: 100%;
+      width: 296px;
+
+      @media (min-width: $bp-tablet) {
+        width: calc(50% - 20px);
+      }
     }
   
     &__image {
@@ -32,15 +43,20 @@
   
     &__btn {
       font-family: 'Bluu Next Cyrillic', sans-serif;
-      font-size: 18px;
-      margin-top: 20px;
+      font-size: 16px;
+      margin-top: 16px;
       background: none;
       border: 1px solid var(--color-secondary);
       color: var(--color-secondary);
-      padding: 18px 36px;
+      padding: 14px 28px;
       border-radius: 100px;
       transition: color 0.3s, background-color 0.3s, transform 0.3s;
       
+      @media screen and (min-width: $bp-tablet) {
+        margin-top: 20px;
+        font-size: 18px;
+        padding: 18px 36px;
+      }
   
       &:hover {
         background-color: var(--color-secondary);
@@ -51,14 +67,42 @@
 
     &__title {
       font-family: 'Bluu Next Cyrillic', sans-serif;
-      font-size: 80px;
+      font-size: 36px;
       font-weight: 700;
-      margin-top: 100px;
       color: var(--color-primary-light);
       text-align: center;
       text-transform: uppercase;
       max-width: 840px;
       line-height: 1.2;
-      margin: 0 auto 70px;
+      margin: 40px auto;
+
+      @media screen and (min-width: $bp-tablet) {
+        font-size: 60px;
+        max-width: 640px;
+        margin: 60px auto;
+      }
+  
+      @media screen and (min-width: $bp-desktop) {
+        font-size: 80px;
+        max-width: 840px;
+        margin: 70px auto;
+      }
+    }
+
+    &__load-more {
+      display: block;
+      margin: 40px auto 0;
+      padding: 16px 40px;
+      font-size: 18px;
+      font-family: 'Bluu Next Cyrillic', sans-serif;
+      background-color: var(--color-secondary);
+      color: var(--color-primary-dark);
+      border: none;
+      border-radius: 100px;
+      transition: background-color 0.3s;
+    
+      &:hover {
+        background-color: var(--color-primary-light);
+      }
     }
   }

@@ -667,10 +667,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"ahnQa":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _mainScss = require("../scss/main.scss");
-var _placeholderJpg = require("../images/characters/placeholder.jpg");
-var _placeholderJpgDefault = parcelHelpers.interopDefault(_placeholderJpg);
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log("\uD83E\uDDD9\u200D\u2642\uFE0F Welcome to the Harry Potter!");
     const btn = document.querySelector('.hero__btn');
@@ -718,17 +715,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const nextBatch = allCharacters.slice(displayedCount, displayedCount + batchSize);
         renderCharacters(nextBatch, true);
         displayedCount += batchSize;
+        if (displayedCount >= allCharacters.length) loadMoreBtn.classList.add('hidden');
     };
-    window.addEventListener('scroll', ()=>{
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) loadMoreCharacters();
-    });
     const renderCharacters = (characters, append = false)=>{
-        charactersContainer.innerHTML = '';
         if (!append) charactersContainer.innerHTML = '';
         characters.forEach((character)=>{
             const card = document.createElement('div');
             card.classList.add('characters-cards__card');
-            const imageUrl = character.image || (0, _placeholderJpgDefault.default);
+            const imageUrl = character.image || './src/images/characters/placeholder.jpg';
             card.innerHTML = `
         <div class="characters-cards__image-wrap">
           <img src="${imageUrl}" alt="${character.name}" class="characters-cards__image" />
@@ -777,6 +771,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 houseFilterContainer.classList.remove('hidden');
             }
             renderCharacters(filteredCharacters);
+            displayedCount = 0;
+            allCharacters = filteredCharacters;
+            charactersContainer.innerHTML = '';
+            loadMoreCharacters();
+            loadMoreBtn.classList.toggle('hidden', allCharacters.length <= batchSize);
         });
     });
     houseFilterButtons.forEach((btn)=>{
@@ -824,36 +823,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 });
 
-},{"../scss/main.scss":"4Pg3x","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","../images/characters/placeholder.jpg":"8NtkK"}],"4Pg3x":[function() {},{}],"jnFvT":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"8NtkK":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
+},{"../scss/main.scss":"4Pg3x"}],"4Pg3x":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
 
 //# sourceMappingURL=harry-potter-api-site.9cf9c461.js.map

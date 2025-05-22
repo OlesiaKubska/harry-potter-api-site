@@ -1,5 +1,4 @@
 import '../scss/main.scss';
-import placeholderImage from '../images/characters/placeholder.jpg';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🧙‍♂️ Welcome to the Harry Potter!');
@@ -64,17 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBatch = allCharacters.slice(displayedCount, displayedCount + batchSize);
     renderCharacters(nextBatch, true);
     displayedCount += batchSize;
+
+    if (displayedCount >= allCharacters.length) {
+      loadMoreBtn.classList.add('hidden');
+    }
   };
 
-  window.addEventListener('scroll', () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-      loadMoreCharacters();
-    }
-  });
-
   const renderCharacters = (characters: Character[], append = false) => {
-    charactersContainer.innerHTML = '';
-    
     if (!append) {
       charactersContainer.innerHTML = '';
     }
@@ -83,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = document.createElement('div');
       card.classList.add('characters-cards__card');
 
-      const imageUrl = character.image || placeholderImage;
+      const imageUrl = character.image || './src/images/characters/placeholder.jpg';
 
       card.innerHTML = `
         <div class="characters-cards__image-wrap">
@@ -140,6 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       renderCharacters(filteredCharacters);
+
+      displayedCount = 0;
+      allCharacters = filteredCharacters;
+      charactersContainer.innerHTML = '';
+      loadMoreCharacters();
+      loadMoreBtn.classList.toggle('hidden', allCharacters.length <= batchSize);
     });
   });
 

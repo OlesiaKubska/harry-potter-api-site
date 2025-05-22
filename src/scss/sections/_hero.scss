@@ -1,3 +1,5 @@
+@use "../base/variables" as *;
+
 .hero {
     background-image: url('/src/images/hero/hero.jpg');
     background-size: cover;
@@ -10,17 +12,29 @@
     }
 
     &__title {
-      font-size: 80px;
+      font-size: 36px;
       font-family: 'Bluu Next Cyrillic', sans-serif;
       font-weight: 700;
       margin-bottom: 30px;
       line-height: 1.2;
+
+      @media screen and (min-width: $bp-mobile) {
+        font-size: 48px;
+      }
+  
+      @media screen and (min-width: $bp-tablet) {
+        font-size: 64px;
+      }
+  
+      @media screen and (min-width: $bp-desktop) {
+        font-size: 80px;
+      }
     }
   
     &__btn {
-      padding: 18px 36px;
+      padding: 14px 28px;
       font-family: 'Bluu Next Cyrillic', sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       background-color: var(--color-secondary);
       color: var(--color-primary-dark);
       border: none;
@@ -31,6 +45,11 @@
       &:hover {
         transform: scale(1.05);
         background-color: var(--color-primary-light);
+      }
+
+      @media screen and (min-width: $bp-tablet) {
+        font-size: 18px;
+        padding: 18px 36px;
       }
     }
   }
