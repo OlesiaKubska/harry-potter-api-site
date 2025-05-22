@@ -1,5 +1,5 @@
 import '../scss/main.scss';
-import '../images/svg/icons.svg';
+import placeholderImage from '../images/characters/placeholder.jpg';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🧙‍♂️ Welcome to the Harry Potter!');
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('character-modal') as HTMLElement;
   const modalBody = document.getElementById('modal-body') as HTMLElement;
   const modalContent = document.querySelector('.modal__content') as HTMLElement;
+  const loadMoreBtn = document.getElementById('load-more-btn') as HTMLButtonElement;
 
   interface Character {
     name: string;
@@ -55,15 +56,38 @@ document.addEventListener('DOMContentLoaded', () => {
     charactersTitle.classList.remove('visually-hidden');
   };
 
-  const renderCharacters = (characters: Character[]) => {
+  let allCharacters: Character[] = [];
+  let displayedCount = 0;
+  const batchSize = 8;
+
+  const loadMoreCharacters = () => {
+    const nextBatch = allCharacters.slice(displayedCount, displayedCount + batchSize);
+    renderCharacters(nextBatch, true);
+    displayedCount += batchSize;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      loadMoreCharacters();
+    }
+  });
+
+  const renderCharacters = (characters: Character[], append = false) => {
     charactersContainer.innerHTML = '';
+    
+    if (!append) {
+      charactersContainer.innerHTML = '';
+    }
+
     characters.forEach((character) => {
       const card = document.createElement('div');
       card.classList.add('characters-cards__card');
 
+      const imageUrl = character.image || placeholderImage;
+
       card.innerHTML = `
         <div class="characters-cards__image-wrap">
-          <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+          <img src="${imageUrl}" alt="${character.name}" class="characters-cards__image" />
           <div class="characters-cards__gradient">
             <div class="characters-cards__info">
               <h3 class="characters-cards__name">${character.name}</h3>
@@ -99,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!group) return;
       updateTitle(group);
+
+      houseFilterContainer.classList.toggle('hidden', group !== 'house');
 
       let filteredCharacters: Character[] = [];
 
@@ -171,4 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
   modal.classList.remove('hidden');
     }
   );
+
+  loadMoreBtn.addEventListener('click', () => {
+    loadMoreCharacters();
+  });
 });

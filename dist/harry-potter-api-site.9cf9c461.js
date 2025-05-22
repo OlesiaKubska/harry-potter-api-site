@@ -667,8 +667,10 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"ahnQa":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _mainScss = require("../scss/main.scss");
-var _iconsSvg = require("../images/svg/icons.svg");
+var _placeholderJpg = require("../images/characters/placeholder.jpg");
+var _placeholderJpgDefault = parcelHelpers.interopDefault(_placeholderJpg);
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log("\uD83E\uDDD9\u200D\u2642\uFE0F Welcome to the Harry Potter!");
     const btn = document.querySelector('.hero__btn');
@@ -681,6 +683,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const modal = document.getElementById('character-modal');
     const modalBody = document.getElementById('modal-body');
     const modalContent = document.querySelector('.modal__content');
+    const loadMoreBtn = document.getElementById('load-more-btn');
     const fetchCharacters = async ()=>{
         try {
             const response = await fetch('https://hp-api.onrender.com/api/characters');
@@ -708,14 +711,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
         charactersTitle.textContent = titles[group] || '';
         charactersTitle.classList.remove('visually-hidden');
     };
-    const renderCharacters = (characters)=>{
+    let allCharacters = [];
+    let displayedCount = 0;
+    const batchSize = 8;
+    const loadMoreCharacters = ()=>{
+        const nextBatch = allCharacters.slice(displayedCount, displayedCount + batchSize);
+        renderCharacters(nextBatch, true);
+        displayedCount += batchSize;
+    };
+    window.addEventListener('scroll', ()=>{
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) loadMoreCharacters();
+    });
+    const renderCharacters = (characters, append = false)=>{
         charactersContainer.innerHTML = '';
+        if (!append) charactersContainer.innerHTML = '';
         characters.forEach((character)=>{
             const card = document.createElement('div');
             card.classList.add('characters-cards__card');
+            const imageUrl = character.image || (0, _placeholderJpgDefault.default);
             card.innerHTML = `
         <div class="characters-cards__image-wrap">
-          <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
+          <img src="${imageUrl}" alt="${character.name}" class="characters-cards__image" />
           <div class="characters-cards__gradient">
             <div class="characters-cards__info">
               <h3 class="characters-cards__name">${character.name}</h3>
@@ -748,6 +764,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             const characters = await fetchCharacters();
             if (!group) return;
             updateTitle(group);
+            houseFilterContainer.classList.toggle('hidden', group !== 'house');
             let filteredCharacters = [];
             if (group === 'students') {
                 filteredCharacters = characters.filter((char)=>char.hogwartsStudent);
@@ -802,8 +819,41 @@ document.addEventListener('DOMContentLoaded', ()=>{
   `;
         modal.classList.remove('hidden');
     });
+    loadMoreBtn.addEventListener('click', ()=>{
+        loadMoreCharacters();
+    });
 });
 
-},{"../scss/main.scss":"4Pg3x","../images/svg/icons.svg":"lp8B6"}],"4Pg3x":[function() {},{}],"lp8B6":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
+},{"../scss/main.scss":"4Pg3x","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","../images/characters/placeholder.jpg":"8NtkK"}],"4Pg3x":[function() {},{}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"8NtkK":[function() {},{}]},["7r6Ii","ahnQa"], "ahnQa", "parcelRequire34fa", {})
 
 //# sourceMappingURL=harry-potter-api-site.9cf9c461.js.map

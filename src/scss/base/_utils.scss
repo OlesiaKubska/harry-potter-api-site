@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .visually-hidden {
     position: absolute;
     left: -10000px;
@@ -9,4 +11,12 @@
 
 .hidden {
     display: none !important;
-  }
+}
+
+#load-more-btn {
+    display: none;
+  
+    @media (max-width: $bp-desktop) {
+      display: block;
+    }
+}
