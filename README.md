@@ -23,8 +23,8 @@
 
 ## 📸 Preview
 
-![Preview 1](./src/images/preview1.png)
-![Preview 2](./src/images/preview2.png)
+<img src="./src/images/preview1.png" alt="Preview 1" width="400"/>
+<img src="./src/images/preview2.png" alt="Preview 2" width="400"/>
 
 ## ⚙️ Запуск локально
 
