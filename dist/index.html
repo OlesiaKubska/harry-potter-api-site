@@ -1,84 +1,77 @@
-<!DOCTYPE html><html lang="en"><head><link rel="stylesheet" href="/harry-potter-api-site.9f367d21.css">
-    <meta charset="UTF-8">
-    <title>Harry Potter API Site</title>
-    <link rel="icon" href="/favicon.c3d66290.png" type="image/x-icon">
-    <link rel="stylesheet" href="/harry-potter-api-site.cb66a315.css">
-  </head>
-  <body>
+<!DOCTYPE html><html lang=en><link rel=stylesheet href=harry-potter-api-site.1f01d1d8.css><title>Harry Potter API Site</title><link rel=icon href=favicon.9606f20b.png type=image/x-icon><link rel=stylesheet href=harry-potter-api-site.39ef81dc.css><body>
     <main>
-      <section class="hero">
-        <div class="container">
-          <h1 class="hero__title">ЛАСКАВО ПРОСИМО<br>У СВІТ ГАРРІ ПОТТЕРА</h1>
-          <button class="hero__btn">Показати всіх персонажів</button>
+      <section class=hero>
+        <div class=container>
+          <h1 class=hero__title>ЛАСКАВО ПРОСИМО<br>У СВІТ ГАРРІ ПОТТЕРА</h1>
+          <button class=hero__btn>Показати всіх персонажів</button>
         </div>
       </section>
-      <section class="characters hidden" id="characters">
-        <div class="container">
-          <div class="characters__container">
-            <h2 class="visually-hidden">Персонажі</h2>
-            <ul class="characters__list">
-              <li class="characters__item">
-                <img src="/students.d2adc3cb.jpg" srcset="/students.d2adc3cb.jpg 1x, /students@2x.1fb62181.jpg 2x" alt="Студенти Гоґвортсу" class="characters__image">
-                <button class="characters__btn" data-group="students">
+      <section class="characters hidden" id=characters>
+        <div class=container>
+          <div class=characters__container>
+            <h2 class=visually-hidden>Персонажі</h2>
+            <ul class=characters__list>
+              <li class=characters__item>
+                <img src=students.5eab0a73.jpg srcset="students.5eab0a73.jpg 1x,students@2x.9f7caa45.jpg 2x" alt="Студенти Гоґвортсу" class=characters__image>
+                <button class=characters__btn data-group=students>
                   Студенти Гоґвортсу
                 </button>
               </li>
-              <li class="characters__item">
-                <img src="/employees.b03ac431.jpg" srcset="/employees.b03ac431.jpg 1x, /employees@2x.bac4d705.jpg 2x" alt="Співробітники Гоґвортсу" class="characters__image">
-                <button class="characters__btn" data-group="staff">
+              <li class=characters__item>
+                <img src=employees.83079bcc.jpg srcset="employees.83079bcc.jpg 1x,employees@2x.95231f77.jpg 2x" alt="Співробітники Гоґвортсу" class=characters__image>
+                <button class=characters__btn data-group=staff>
                   Співробітники Гоґвортсу
                 </button>
               </li>
-              <li class="characters__item">
-                <img src="/characters.c2967599.jpg" srcset="/characters.c2967599.jpg 1x, /characters@2x.abff096a.jpg 2x" alt="Персонажі в певному будинку" class="characters__image">
-                <button class="characters__btn" data-group="house">
+              <li class=characters__item>
+                <img src=characters.4c9783f2.jpg srcset="characters.4c9783f2.jpg 1x,characters@2x.2f61a497.jpg 2x" alt="Персонажі в певному будинку" class=characters__image>
+                <button class=characters__btn data-group=house>
                   Персонажі в певному будинку
                 </button>
               </li>
             </ul>
           </div>
         </div>
-        <h2 class="characters__title visually-hidden" id="characters-title"></h2>
-        <ul class="characters-filters hidden" id="characters-filters">
-          <li class="characters-filters__item">
-            <button class="characters-filters__btn" data-house="Gryffindor">
-              <img src="/gryffindor.4a2eaf60.png" alt="Gryffindor" class="characters-filters__image">
+        <h2 class="characters__title visually-hidden" id=characters-title></h2>
+        <ul class="characters-filters hidden" id=characters-filters>
+          <li class=characters-filters__item>
+            <button class=characters-filters__btn data-house=Gryffindor>
+              <img src=gryffindor.63586431.png alt=Gryffindor class=characters-filters__image>
               Gryffindor
             </button>
           </li>
-          <li class="characters-filters__item">
-            <button class="characters-filters__btn" data-house="Slytherin">
-              <img src="/slytherin.1b68ab53.png" alt="Slytherin" class="characters-filters__image">
+          <li class=characters-filters__item>
+            <button class=characters-filters__btn data-house=Slytherin>
+              <img src=slytherin.f96d6c70.png alt=Slytherin class=characters-filters__image>
               Slytherin
             </button>
           </li>
-          <li class="characters-filters__item">
-            <button class="characters-filters__btn" data-house="Ravenclaw">
-              <img src="/ravenclaw.934d04c6.png" alt="Ravenclaw" class="characters-filters__image">
+          <li class=characters-filters__item>
+            <button class=characters-filters__btn data-house=Ravenclaw>
+              <img src=ravenclaw.6466349f.png alt=Ravenclaw class=characters-filters__image>
               Ravenclaw
             </button>
           </li>
-          <li class="characters-filters__item">
-            <button class="characters-filters__btn" data-house="Hufflepuff">
-              <img src="/hufflepuff.431c8fe8.png" alt="Hufflepuff" class="characters-filters__image">
+          <li class=characters-filters__item>
+            <button class=characters-filters__btn data-house=Hufflepuff>
+              <img src=hufflepuff.0f540ce9.png alt=Hufflepuff class=characters-filters__image>
               Hufflepuff
             </button>
           </li>
         </ul>
-        <div class="characters-cards"></div>
-        <button id="load-more-btn" class="characters__load-more hidden">
+        <div class=characters-cards></div>
+        <button id=load-more-btn class="characters__load-more hidden">
           Завантажити більше
         </button>
       </section>
     </main>
 
-    <div class="modal hidden" id="character-modal">
-      <div class="modal__content">
-        <div class="modal__body" id="modal-body"></div>
+    <div class="hidden modal" id=character-modal>
+      <div class=modal__content>
+        <div class=modal__body id=modal-body></div>
       </div>
     </div>
 
-    <script type="module" src="/harry-potter-api-site.9cf9c461.js"></script>
+    <script type=module src=harry-potter-api-site.de7013f6.js></script>
   
 
-</body></html>

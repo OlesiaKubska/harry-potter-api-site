@@ -722,10 +722,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         characters.forEach((character)=>{
             const card = document.createElement('div');
             card.classList.add('characters-cards__card');
-            const imageUrl = character.image || './src/images/characters/placeholder.jpg';
             card.innerHTML = `
         <div class="characters-cards__image-wrap">
-          <img src="${imageUrl}" alt="${character.name}" class="characters-cards__image" />
+          <img src="${character.image}" alt="${character.name}" class="characters-cards__image" />
           <div class="characters-cards__gradient">
             <div class="characters-cards__info">
               <h3 class="characters-cards__name">${character.name}</h3>
