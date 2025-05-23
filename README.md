@@ -21,10 +21,10 @@
 - 🌟 Змінено фавікон
 - 🎞️ Додано анімації
 
-## 📸 Приклад
+## 📸 Preview
 
-![Screenshot](./src/images/preview1.jpg)
-![Screenshot](./src/images/preview2.jpg)
+![Preview 1](./src/images/preview1.png)
+![Preview 2](./src/images/preview2.png)
 
 ## ⚙️ Запуск локально
 
